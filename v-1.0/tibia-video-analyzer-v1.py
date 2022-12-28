@@ -1,29 +1,32 @@
 #opencv
 import cv2
 import pytesseract
+import numpy as np
 pytesseract.pytesseract.tesseract_cmd = 'C:/Program Files/Tesseract-OCR/tesseract.exe'
 
-img = cv2.imread("exori gran-3.png")
-img_cinza = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
-lower_red = np.array(5,9,23)
-upper__red = np.array(255,9,23)
+img = cv2.imread('exori gran-4.png')
+imgHSV = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
 
-mask = cv2.inRange(hsv, lower_red, upper_red)
+lower = np.array([55,50,200])
+upper = np.array([70,250,255])
 
-result = cv2.bitwise_and(frame, frame, mask = mask)
+mask = cv2.inRange(imgHSV, lower, upper)
+
+mask2 = pytesseract.image_to_string(mask)
+print(mask2)
 
 
-
-cv2.imshow('frame', frame)
-cv2.imshow('mask', mask)
-cv2.imshow('result', result)
+cv2.imshow("res", mask)
 cv2.waitKey(0)
 
 
 
 
 
-#resultado = pytesseract.image_to_boxes(img)
 
-#print(resultado)
+
+
+
+
+
 
